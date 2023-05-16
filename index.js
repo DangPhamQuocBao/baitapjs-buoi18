@@ -62,25 +62,33 @@ function timSoDuongNhoNhat() {
 }
 // tim so chan cuoi cung trong mang
 function soChanCuoiCung() {
-  var bienSoDuongMoi = [];
-  for (var x = 0; x <= themSo.length; x++) {
-    if (themSo[x] >= 0) {
-      bienSoDuongMoi.push(themSo[x]);
+  // var bienSoDuongMoi = [];
+  // for (var x = 0; x <= themSo.length; x++) {
+  //   if (themSo[x] >= 0) {
+  //     bienSoDuongMoi.push(themSo[x]);
+  //   }
+  //   console.log(bienSoDuongMoi);
+  // }
+  // var chanCuoi = bienSoDuongMoi[-1];
+  // for (var i = 1; i <= bienSoDuongMoi.length; i++) {
+  //   var timChanCuoi = bienSoDuongMoi[bienSoDuongMoi.length - i];
+  //   if (bienSoDuongMoi[bienSoDuongMoi.length - 1] >= 0) {
+  //     chanCuoi = timChanCuoi = bienSoDuongMoi[bienSoDuongMoi.length - i];
+  //     return timChanCuoi;
+  //   } else if (bienSoDuongMoi[bienSoDuongMoi.length - i] < 0) {
+  //     chanCuoi = timChanCuoi = bienSoDuongMoi[-1];
+  //   }
+  //   // var bienSoDuongMoi =themSo[themSo.length-1];
+  // }
+  var bienSoChanCuoi = -1;
+  for (var i = themSo.length - 1; i >= 0; i--) {
+    if (themSo[i] % 2 == 0) {
+      bienSoChanCuoi = themSo[i];
+      break;
     }
-    console.log(bienSoDuongMoi);
   }
-  var chanCuoi = bienSoDuongMoi[-1];
-  for (var i = 1; i <= bienSoDuongMoi.length; i++) {
-    var timChanCuoi = bienSoDuongMoi[bienSoDuongMoi.length - i];
-    if (bienSoDuongMoi[bienSoDuongMoi.length - 1] >= 0) {
-      chanCuoi = timChanCuoi = bienSoDuongMoi[bienSoDuongMoi.length - i];
-      return timChanCuoi;
-    } else if (bienSoDuongMoi[bienSoDuongMoi.length - i] < 0) {
-      chanCuoi = timChanCuoi = bienSoDuongMoi[-1];
-    }
-    // var bienSoDuongMoi =themSo[themSo.length-1];
-  }
-  document.querySelector("#hienThiSoChanCuoi").innerHTML = timChanCuoi;
+
+  document.querySelector("#hienThiSoChanCuoi").innerHTML = bienSoChanCuoi;
 }
 //Đổi chỗ 2 giá trị trong mảng theo vị trí (Cho nhập vào 2 vị trí muốn đổi chỗ giá trị)
 
@@ -93,9 +101,65 @@ function doiViTri() {
   document.querySelector("#hienThiViTri").innerHTML = themSo;
 }
 //sap xep mang
+// function sapXep() {
+//   themSo.sort();
+//   document.querySelector("#sapXepMang").innerHTML = themSo;
+// }
 function sapXep() {
-  themSo.sort();
+  themSo.sort(function sapXep(a, b) {
+    a = +a;
+    b = +b;
+    return a - b;
+  });
   document.querySelector("#sapXepMang").innerHTML = themSo;
+}
+//Tìm số nguyên tố đầu tiên trong mảng. Nếu mảng không có số nguyên tố thì trả về -1.
+// function timSoNguyenTo(themSo) {
+//   for (var i = 0; i < themSo.length; i++) {
+//     if (soNguyenTo(themSo[i])) {
+//       return themSo[i];
+//     }
+//   }
+//   return -1;
+// }
+
+// function soNguyenTo(number) {
+//   if (number <= 1) {
+//     return false;
+//   }
+//   for (let i = 2; i <= Math.sqrt(number); i++) {
+//     if (number % i === 0) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+// function findFirstPrime(themSo) {
+//   for (let i = 0; i < themSo.length; i++) {
+//     let isPrime = true;
+//     for (let j = 2; j <= Math.sqrt(themSo[i]); j++) {
+//       if (themSo[i] % j === 0) {
+//         isPrime = false;
+//         break;
+//       }
+//     }
+//     if (isPrime) {
+//       return themSo[i];
+//       document.querySelector("#hienThiSoNguyenToDauTien").innerHTML = themSo[i];
+//     }
+//   }
+//   return -1;
+//   document.querySelector("#hienThiSoNguyenToDauTien").innerHTML = -1;
+// }
+function timSoNguyenTo() {
+  var soNguyenTo = -1;
+  for (var i = 0; i <= themSo.length - 1; i++) {
+    if (themSo[i] > 1 && themSo[i] % 2 != 0) {
+      soNguyenTo = themSo[i];
+      break;
+    }
+  }
+  document.querySelector("#hienThiSoNguyenToDauTien").innerHTML = soNguyenTo;
 }
 
 //them mang,tim xem trong mang nay co bao nhieu so nguyen
